@@ -8,9 +8,9 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchAPOD().then((data) => setRandomPictures(data));
-  });
+  }, []);
 
-  return <p>HomePage</p>;
+  return <div>{randomPictures.length > 0 && console.log(randomPictures)}</div>;
 };
 
 export default HomePage;
