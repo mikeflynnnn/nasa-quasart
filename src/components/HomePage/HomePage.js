@@ -9,19 +9,35 @@ import PictureCard from "../PictureCard/PictureCard";
 const HomePage = () => {
   const [randomPictures, setRandomPictures] = useState([]);
 
+  const addUniqueIdsToPictures = (pictureData) => {
+    return pictureData.map((picture) => {
+      const uniqueId = uuidv4();
+
+      return {
+        ...picture,
+        id: uniqueId,
+      };
+    });
+  };
+
   useEffect(() => {
-    fetchAPOD().then((data) => setRandomPictures(data));
+    fetchAPOD().then((data) => {
+      const pictures = addUniqueIdsToPictures(data);
+      setRandomPictures(pictures);
+    });
   }, []);
 
   const generatePictureCards = () => {
     return randomPictures.map((picture) => {
-      const cardKey = uuidv4();
-
-      return <PictureCard key={cardKey} pictureDetails={picture} />;
+      return <PictureCard key={picture.id} pictureDetails={{ ...picture }} />;
     });
   };
 
-  return <section className="picture-display">{randomPictures.length > 0 && generatePictureCards()}</section>;
+  return (
+    <section className="picture-display">
+      {randomPictures.length > 0 && generatePictureCards()}
+    </section>
+  );
 };
 
 export default HomePage;
