@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./HomePage.scss";
+// generate unique keys
+import { v4 as uuidv4 } from "uuid";
 
 import { fetchAPOD } from "../../apiCalls";
 import PictureCard from "../PictureCard/PictureCard";
@@ -13,7 +15,9 @@ const HomePage = () => {
 
   const generatePictureCards = () => {
     return randomPictures.map((picture) => {
-      return <PictureCard pictureDetails={picture} />;
+      const cardKey = uuidv4();
+
+      return <PictureCard key={cardKey} pictureDetails={picture} />;
     });
   };
 
