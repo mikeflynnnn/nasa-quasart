@@ -30,8 +30,6 @@ const HomePage = () => {
   }, []);
 
   const likeAPicture = (id) => {
-    const likedPicture = randomPictures.find((picture) => picture.id === id);
-
     const updatedLikes = randomPictures.map((picture) => {
       if (picture.id === id) {
         if (picture.liked) {
@@ -43,9 +41,16 @@ const HomePage = () => {
     });
 
     setRandomPictures(updatedLikes);
+    updateFavoritePictures(id);
+  };
+
+  const updateFavoritePictures = (id) => {
+    const likedPicture = randomPictures.find((picture) => picture.id === id);
+
+    likedPicture.liked = !likedPicture.liked;
 
     setFavoritePictures((prevState) => {
-      if (!likedPicture.liked) {
+      if (likedPicture.liked) {
         return [...prevState, likedPicture];
       } else {
         const removeUnlikedPicture = prevState.filter(
@@ -61,7 +66,7 @@ const HomePage = () => {
       return (
         <PictureCard
           key={picture.id}
-          pictureDetails={{ ...picture }}
+          pictureDetails={picture}
           like={likeAPicture}
         />
       );
