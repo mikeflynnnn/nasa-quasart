@@ -1,0 +1,11 @@
+.details-container {
+  height: 550px;
+  width: 425px;
+  border: 2px solid black;
+
+  .details-img {
+    height: 400px;
+    width: 400px;
+    object-fit: fill;
+  }
+}
