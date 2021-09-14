@@ -16,6 +16,7 @@ const HomePage = () => {
       return {
         ...picture,
         id: uniqueId,
+        liked: false,
       };
     });
   };
@@ -27,9 +28,26 @@ const HomePage = () => {
     });
   }, []);
 
+  const likeAPicture = (id) => {
+    const updatedLikes = randomPictures.map((picture) => {
+      if (picture.id === id) {
+        return { ...picture, liked: true };
+      }
+      return picture;
+    });
+    
+    setRandomPictures(updatedLikes);
+  };
+
   const generatePictureCards = () => {
     return randomPictures.map((picture) => {
-      return <PictureCard key={picture.id} pictureDetails={{ ...picture }} />;
+      return (
+        <PictureCard
+          key={picture.id}
+          pictureDetails={{ ...picture }}
+          like={likeAPicture}
+        />
+      );
     });
   };
 
