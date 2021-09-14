@@ -21,7 +21,7 @@ const HomePage = () => {
     });
   };
 
-  return <div>{randomPictures.length > 0 && generatePictureCards()}</div>;
+  return <section className="picture-display">{randomPictures.length > 0 && generatePictureCards()}</section>;
 };
 
 export default HomePage;
