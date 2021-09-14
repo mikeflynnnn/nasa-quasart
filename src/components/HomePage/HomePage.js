@@ -61,8 +61,8 @@ const HomePage = () => {
     });
   };
 
-  const generatePictureCards = () => {
-    return randomPictures.map((picture) => {
+  const generatePictureCards = (pictureData) => {
+    return pictureData.map((picture) => {
       return (
         <PictureCard
           key={picture.id}
@@ -75,7 +75,7 @@ const HomePage = () => {
 
   return (
     <section className="picture-display">
-      {randomPictures.length > 0 && generatePictureCards()}
+      {randomPictures.length > 0 && generatePictureCards(randomPictures)}
     </section>
   );
 };
