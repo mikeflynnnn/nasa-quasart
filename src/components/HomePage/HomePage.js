@@ -31,11 +31,13 @@ const HomePage = () => {
   const likeAPicture = (id) => {
     const updatedLikes = randomPictures.map((picture) => {
       if (picture.id === id) {
+        if (picture.liked) {
+          return { ...picture, liked: false };
+        }
         return { ...picture, liked: true };
       }
-      return picture;
     });
-    
+
     setRandomPictures(updatedLikes);
   };
 
