@@ -9,19 +9,56 @@ import PictureCard from "../PictureCard/PictureCard";
 const HomePage = () => {
   const [randomPictures, setRandomPictures] = useState([]);
 
-  useEffect(() => {
-    fetchAPOD().then((data) => setRandomPictures(data));
-  }, []);
+  const addUniqueIdsToPictures = (pictureData) => {
+    return pictureData.map((picture) => {
+      const uniqueId = uuidv4();
 
-  const generatePictureCards = () => {
-    return randomPictures.map((picture) => {
-      const cardKey = uuidv4();
-
-      return <PictureCard key={cardKey} pictureDetails={picture} />;
+      return {
+        ...picture,
+        id: uniqueId,
+        liked: false,
+      };
     });
   };
 
-  return <section className="picture-display">{randomPictures.length > 0 && generatePictureCards()}</section>;
+  useEffect(() => {
+    fetchAPOD().then((data) => {
+      const pictures = addUniqueIdsToPictures(data);
+      setRandomPictures(pictures);
+    });
+  }, []);
+
+  const likeAPicture = (id) => {
+    const updatedLikes = randomPictures.map((picture) => {
+      if (picture.id === id) {
+        if (picture.liked) {
+          return { ...picture, liked: false };
+        }
+        return { ...picture, liked: true };
+      }
+      return picture;
+    });
+    
+    setRandomPictures(updatedLikes);
+  };
+
+  const generatePictureCards = () => {
+    return randomPictures.map((picture) => {
+      return (
+        <PictureCard
+          key={picture.id}
+          pictureDetails={{ ...picture }}
+          like={likeAPicture}
+        />
+      );
+    });
+  };
+
+  return (
+    <section className="picture-display">
+      {randomPictures.length > 0 && generatePictureCards()}
+    </section>
+  );
 };
 
 export default HomePage;
