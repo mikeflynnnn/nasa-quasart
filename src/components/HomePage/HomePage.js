@@ -8,6 +8,7 @@ import PictureCard from "../PictureCard/PictureCard";
 
 const HomePage = () => {
   const [randomPictures, setRandomPictures] = useState([]);
+  const [favoritePictures, setFavoritePictures] = useState([]);
 
   const addUniqueIdsToPictures = (pictureData) => {
     return pictureData.map((picture) => {
@@ -29,6 +30,8 @@ const HomePage = () => {
   }, []);
 
   const likeAPicture = (id) => {
+    const likedPicture = randomPictures.find((picture) => picture.id === id);
+
     const updatedLikes = randomPictures.map((picture) => {
       if (picture.id === id) {
         if (picture.liked) {
@@ -38,8 +41,19 @@ const HomePage = () => {
       }
       return picture;
     });
-    
+
     setRandomPictures(updatedLikes);
+
+    setFavoritePictures((prevState) => {
+      if (!likedPicture.liked) {
+        return [...prevState, likedPicture];
+      } else {
+        const removeUnlikedPicture = prevState.filter(
+          (picture) => picture.id !== id
+        );
+        return removeUnlikedPicture;
+      }
+    });
   };
 
   const generatePictureCards = () => {
