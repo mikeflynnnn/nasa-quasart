@@ -1,17 +1,19 @@
 import React from "react";
 import "./PictureCard.scss";
 
+import LikeButton from "../LikeButton/Likebutton";
+
 const PictureCard = ({ pictureDetails }) => {
+  const { url, title, date, id } = pictureDetails;
+
   return (
     <article className="details-container">
-      <img
-        className="details-img"
-        src={pictureDetails.url}
-        alt={pictureDetails.title}
-      />
-      <p className="details-title">{pictureDetails.title}</p>
-      <p className="details-date">{pictureDetails.date}</p>
-      <button>Like</button>
+      <img className="details-img" src={url} alt={title} />
+      <p className="details-title">{title}</p>
+      <p className="details-date">{date}</p>
+      <div onClick={() => console.log('yo')}>
+        <LikeButton />
+      </div>
     </article>
   );
 };
