@@ -36,8 +36,9 @@ const HomePage = () => {
         }
         return { ...picture, liked: true };
       }
+      return picture;
     });
-
+    
     setRandomPictures(updatedLikes);
   };
 
