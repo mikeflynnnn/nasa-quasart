@@ -7,8 +7,11 @@ import { fetchAPOD } from "../../apiCalls";
 import PictureCard from "../PictureCard/PictureCard";
 
 const HomePage = () => {
-  const [randomPictures, setRandomPictures] = useState([]);
-  const [favoritePictures, setFavoritePictures] = useState([]);
+  
+  const [pictureData, setPictureData] = useState({
+    randomPictures: [],
+    favoritePictures: [],
+  });
 
   const addUniqueIdsToPictures = (pictureData) => {
     return pictureData.map((picture) => {
@@ -25,12 +28,12 @@ const HomePage = () => {
   useEffect(() => {
     fetchAPOD().then((data) => {
       const pictures = addUniqueIdsToPictures(data);
-      setRandomPictures(pictures);
+      setPictureData({ randomPictures: pictures, favoritePictures: [] });
     });
   }, []);
 
   const likeAPicture = (id) => {
-    const updatedLikes = randomPictures.map((picture) => {
+    const updatedLikes = pictureData.randomPictures.map((picture) => {
       if (picture.id === id) {
         if (picture.liked) {
           return { ...picture, liked: false };
@@ -40,25 +43,30 @@ const HomePage = () => {
       return picture;
     });
 
-    setRandomPictures(updatedLikes);
-    updateFavoritePictures(id);
+    setPictureData((prevState) => {
+      return {
+        randomPictures: updatedLikes,
+        favoritePictures: updateFavoritePictures(
+          prevState.favoritePictures,
+          id
+        ),
+      };
+    });
   };
 
-  const updateFavoritePictures = (id) => {
-    const likedPicture = randomPictures.find((picture) => picture.id === id);
+  const updateFavoritePictures = (state, id) => {
+    const likedPicture = pictureData.randomPictures.find(
+      (picture) => picture.id === id
+    );
 
     likedPicture.liked = !likedPicture.liked;
 
-    setFavoritePictures((prevState) => {
-      if (likedPicture.liked) {
-        return [...prevState, likedPicture];
-      } else {
-        const removeUnlikedPicture = prevState.filter(
-          (picture) => picture.id !== id
-        );
-        return removeUnlikedPicture;
-      }
-    });
+    if (likedPicture.liked) {
+      return [...state, likedPicture];
+    } else {
+      const removeUnlikedPicture = state.filter((picture) => picture.id !== id);
+      return removeUnlikedPicture;
+    }
   };
 
   const generatePictureCards = (pictureData) => {
@@ -75,9 +83,11 @@ const HomePage = () => {
 
   return (
     <section className="picture-display">
-      {randomPictures.length > 0 && generatePictureCards(randomPictures)}
+      {pictureData.randomPictures.length > 0 &&
+        generatePictureCards(pictureData.randomPictures)}
     </section>
   );
 };
 
 export default HomePage;
+// if localStorage or randomize added, need to checkout favorites to update randomPictures `liked` value
