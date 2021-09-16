@@ -83,11 +83,13 @@ const App = () => {
     });
   };
 
-  const determineImages = viewFavorites ? pictureData.favoritePictures : pictureData.randomPictures;
+  const determineImages = viewFavorites
+    ? pictureData.favoritePictures
+    : pictureData.randomPictures;
 
   return (
     <>
-      <Nav favorites={setViewFavorites} />
+      <Nav favorites={{ viewFavorites, setViewFavorites }} />
       <HomePage pictures={generatePictureCards(determineImages)} />
     </>
   );
