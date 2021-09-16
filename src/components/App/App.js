@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-// generate unique keys
-import { v4 as uuidv4 } from "uuid";
 
 import HomePage from "../HomePage/HomePage";
 import Nav from "../Nav/Nav";
 import FavoritesPage from "../FavoritesPage/FavoritesPage";
 import PictureCard from "../PictureCard/PictureCard";
 import { fetchAPOD } from "../../apiCalls";
-
+// generate unique keys
+import { v4 as uuidv4 } from "uuid";
 import { Switch, Route } from "react-router-dom";
 
 const App = () => {
-  const [randomPictures, setRandomPictures] = useState([]);
   const [pictureData, setPictureData] = useState({
     randomPictures: [],
     favoritePictures: [],
@@ -59,7 +57,9 @@ const App = () => {
   };
 
   const updateFavoritePictures = (state, id) => {
-    const likedPicture = pictureData.randomPictures.find((picture) => picture.id === id);
+    const likedPicture = pictureData.randomPictures.find(
+      (picture) => picture.id === id
+    );
 
     likedPicture.liked = !likedPicture.liked;
 
@@ -86,10 +86,18 @@ const App = () => {
   return (
     <>
       <Nav />
-      {/* <Switch> */}
-      <HomePage pictures={generatePictureCards(pictureData.randomPictures)} />
-      <FavoritesPage />
-      {/* </Switch> */}
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <HomePage
+              pictures={generatePictureCards(pictureData.randomPictures)}
+            />
+          )}
+        />
+        <Route path="/favorites" render={() => <FavoritesPage />} />
+      </Switch>
     </>
   );
 };
