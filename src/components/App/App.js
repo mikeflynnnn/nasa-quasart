@@ -83,11 +83,12 @@ const App = () => {
     });
   };
 
-  // useState(false) if true render favs else render random
+  const determineImages = viewFavorites ? pictureData.favoritePictures : pictureData.randomPictures;
+
   return (
     <>
       <Nav favorites={setViewFavorites} />
-      <HomePage pictures={generatePictureCards(pictureData.randomPictures)} />
+      <HomePage pictures={generatePictureCards(determineImages)} />
     </>
   );
 };
