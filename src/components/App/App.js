@@ -12,12 +12,15 @@ import { Switch, Route } from "react-router-dom";
 
 const App = () => {
   const [randomPictures, setRandomPictures] = useState([]);
+  const [pictureData, setPictureData] = useState({
+    randomPictures: [],
+    favoritePictures: [],
+  });
 
   useEffect(() => {
     fetchAPOD().then((data) => {
       const pictures = addUniqueIdsToPictures(data);
-      // setPictureData({ randomPictures: pictures, favoritePictures: [] });
-      setRandomPictures(pictures);
+      setPictureData({ randomPictures: pictures, favoritePictures: [] });
     });
   }, []);
 
@@ -34,7 +37,7 @@ const App = () => {
   };
 
   const likeAPicture = (id) => {
-    const updatedLikes = randomPictures.map((picture) => {
+    const updatedLikes = pictureData.randomPictures.map((picture) => {
       if (picture.id === id) {
         if (picture.liked) {
           return { ...picture, liked: false };
@@ -44,30 +47,29 @@ const App = () => {
       return picture;
     });
 
-    setRandomPictures(updatedLikes);
-    // setPictureData((prevState) => {
-    //   return {
-    //     randomPictures: updatedLikes,
-    //     favoritePictures: updateFavoritePictures(
-    //       prevState.favoritePictures,
-    //       id
-    //     ),
-    //   };
-    // });
+    setPictureData((prevState) => {
+      return {
+        randomPictures: updatedLikes,
+        favoritePictures: updateFavoritePictures(
+          prevState.favoritePictures,
+          id
+        ),
+      };
+    });
   };
 
-  // const updateFavoritePictures = (state, id) => {
-  //   const likedPicture = randomPictures.find((picture) => picture.id === id);
+  const updateFavoritePictures = (state, id) => {
+    const likedPicture = pictureData.randomPictures.find((picture) => picture.id === id);
 
-  //   likedPicture.liked = !likedPicture.liked;
+    likedPicture.liked = !likedPicture.liked;
 
-  //   if (likedPicture.liked) {
-  //     return [...state, likedPicture];
-  //   } else {
-  //     const removeUnlikedPicture = state.filter((picture) => picture.id !== id);
-  //     return removeUnlikedPicture;
-  //   }
-  // };
+    if (likedPicture.liked) {
+      return [...state, likedPicture];
+    } else {
+      const removeUnlikedPicture = state.filter((picture) => picture.id !== id);
+      return removeUnlikedPicture;
+    }
+  };
 
   const generatePictureCards = (pictureData) => {
     return pictureData.map((picture) => {
@@ -85,7 +87,7 @@ const App = () => {
     <>
       <Nav />
       {/* <Switch> */}
-      <HomePage pictures={generatePictureCards(randomPictures)} />
+      <HomePage pictures={generatePictureCards(pictureData.randomPictures)} />
       <FavoritesPage />
       {/* </Switch> */}
     </>
