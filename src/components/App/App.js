@@ -13,6 +13,8 @@ const App = () => {
     favoritePictures: [],
   });
 
+  const [viewFavorites, setViewFavorites] = useState(false);
+
   useEffect(() => {
     fetchAPOD().then((data) => {
       const pictures = addUniqueIdsToPictures(data);
@@ -81,9 +83,10 @@ const App = () => {
     });
   };
 
+  // useState(false) if true render favs else render random
   return (
     <>
-      <Nav />
+      <Nav favorites={setViewFavorites} />
       <HomePage pictures={generatePictureCards(pictureData.randomPictures)} />
     </>
   );
