@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import HomePage from "../HomePage/HomePage";
 import Nav from "../Nav/Nav";
-import FavoritesPage from "../FavoritesPage/FavoritesPage";
 import PictureCard from "../PictureCard/PictureCard";
 import { fetchAPOD } from "../../apiCalls";
 // generate unique keys
 import { v4 as uuidv4 } from "uuid";
-import { Switch, Route } from "react-router-dom";
 
 const App = () => {
   const [pictureData, setPictureData] = useState({
@@ -86,18 +84,7 @@ const App = () => {
   return (
     <>
       <Nav />
-      <Switch>
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <HomePage
-              pictures={generatePictureCards(pictureData.randomPictures)}
-            />
-          )}
-        />
-        <Route path="/favorites" render={() => <FavoritesPage />} />
-      </Switch>
+      <HomePage pictures={generatePictureCards(pictureData.randomPictures)} />
     </>
   );
 };
