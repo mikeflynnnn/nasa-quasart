@@ -1,5 +1,28 @@
 .picture-display {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  column-count: 4;
+  column-gap: 16px;
+}
+
+.picture-display .details-container {
+  display: inline-block;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+@media (max-width: 1199px) {
+  .picture-display {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 991px) {
+  .picture-display {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .picture-display {
+    column-count: 1;
+  }
 }
