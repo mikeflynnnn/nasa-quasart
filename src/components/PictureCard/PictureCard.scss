@@ -1,11 +1,11 @@
 .details-container {
-  height: 550px;
+  height: fit-content;
   width: 425px;
   border: 2px solid black;
 
   .details-img {
     height: 400px;
-    width: 400px;
+    width: 100%;
     object-fit: fill;
   }
 }
