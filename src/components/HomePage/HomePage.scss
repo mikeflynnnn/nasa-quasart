@@ -1,12 +1,6 @@
 .picture-display {
-  column-count: 4;
+  column-count: 3;
   column-gap: 16px;
-}
-
-.picture-display .details-container {
-  display: inline-block;
-  margin-bottom: 16px;
-  width: 100%;
 }
 
 @media (max-width: 1199px) {

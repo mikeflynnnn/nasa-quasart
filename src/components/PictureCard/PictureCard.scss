@@ -1,8 +1,9 @@
 .details-container {
-  height: fit-content;
-  width: 425px;
-  border: 2px solid black;
-
+  height: auto;
+  display: inline-block;
+  margin-bottom: 16px;
+  width: 100%;
+  border: 2px solid red;
   .details-img {
     height: 400px;
     width: 100%;
