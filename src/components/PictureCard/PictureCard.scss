@@ -5,8 +5,7 @@
   background-color: whitesmoke;
   width: auto;
   border-radius: 8px;
-  box-shadow: 0 -1px 4px 0 rgba(25, 32, 36, 0.04),
-  0 3px 6px 0 rgba(25, 32, 36, 0.16);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
   .details-img {
     border-radius: 8px 8px 0 0;
@@ -15,3 +14,4 @@
     object-fit: fill;
   }
 }
+
