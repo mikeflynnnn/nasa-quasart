@@ -2,12 +2,7 @@ import React from "react";
 import "./HomePage.scss";
 
 const HomePage = ({ pictures }) => {
-
-  return (
-    <section className="picture-display">
-      {pictures.length > 0 && pictures}
-    </section>
-  );
+  return <section className="picture-display">{pictures}</section>;
 };
 
 export default HomePage;
