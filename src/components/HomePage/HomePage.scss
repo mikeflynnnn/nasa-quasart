@@ -1,6 +1,8 @@
 .picture-display {
   column-count: 3;
   column-gap: 16px;
+  margin-top: 20px;
+  padding: 0 10px;
 }
 
 @media (max-width: 1199px) {
