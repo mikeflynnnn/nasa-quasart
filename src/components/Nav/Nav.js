@@ -7,8 +7,11 @@ const Nav = ({ favorites }) => {
   return (
     <nav className="nav">
       <p>QuasarT</p>
-      <button onClick={() => setViewFavorites((prevState) => !prevState)}>
-        {viewFavorites ? "Home" : "My Favorites"}
+      <button
+        className="rainbow-button"
+        onClick={() => setViewFavorites((prevState) => !prevState)}
+      >
+        {viewFavorites ? "Home" : "Favorites"}
       </button>
     </nav>
   );
