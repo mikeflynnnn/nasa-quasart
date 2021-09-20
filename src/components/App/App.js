@@ -37,10 +37,7 @@ const App = () => {
   const likeAPicture = (id) => {
     const updatedLikes = pictureData.randomPictures.map((picture) => {
       if (picture.id === id) {
-        if (picture.liked) {
-          return { ...picture, liked: false };
-        }
-        return { ...picture, liked: true };
+        return { ...picture, liked: !picture.liked };
       }
       return picture;
     });
@@ -83,9 +80,14 @@ const App = () => {
     });
   };
 
+  // generateLoadingCard to react content loader. set size to number in fetch call (20)
+  // create flag for loading, setLoading, in (add to object in state)
+  // have fetch call toggle flag which causes re-render
+
   const determineImages = viewFavorites
     ? pictureData.favoritePictures
     : pictureData.randomPictures;
+  console.log(pictureData.favoritePictures);
 
   return (
     <>
