@@ -5,13 +5,15 @@ import LikeButton from "../LikeButton/Likebutton";
 import { formatDate } from "../../utilities";
 
 const PictureCard = ({ pictureDetails, like }) => {
-  const { url, title, date, id, liked, explanation } = pictureDetails;
+  const { url, title, date, id, hdurl, liked, explanation } = pictureDetails;
 
   const formatedDate = formatDate(date);
 
   return (
     <article className="apod-container">
-      <img className="apod-img" src={url} alt={title} />
+      <a href={hdurl} target="_blank" rel="noreferrer noopener">
+        <img className="apod-img" src={url} alt={title} />
+      </a>
       <div className="apod-details">
         <div className="apod-title-container">
           <p className="apod-title">{title} </p>
