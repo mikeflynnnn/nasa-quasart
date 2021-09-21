@@ -4,7 +4,11 @@ import HomePage from "../HomePage/HomePage";
 import Nav from "../Nav/Nav";
 import PictureCard from "../PictureCard/PictureCard";
 import { fetchAPOD } from "../../apiCalls";
-import { addUniqueIdsToPictures, generateLoadingCards } from "../../utilities";
+import {
+  addUniqueIdsToPictures,
+  generateLoadingCards,
+  updateFavoritePictures,
+} from "../../utilities";
 
 const App = () => {
   const [pictureData, setPictureData] = useState({
@@ -16,6 +20,7 @@ const App = () => {
 
   const [viewFavorites, setViewFavorites] = useState(false);
 
+  // fetch data
   useEffect(() => {
     fetchAPOD().then((data) => {
       const pictures = addUniqueIdsToPictures(data);
@@ -30,6 +35,7 @@ const App = () => {
     });
   }, []);
 
+  // update localStorage
   useEffect(() => {
     const saveFavoritesToStorage = JSON.stringify(pictureData.favoritePictures);
 
@@ -48,26 +54,12 @@ const App = () => {
       return {
         randomPictures: updatedLikes,
         favoritePictures: updateFavoritePictures(
+          pictureData,
           prevState.favoritePictures,
           id
         ),
       };
     });
-  };
-
-  const updateFavoritePictures = (state, id) => {
-    const likedPicture = pictureData.randomPictures.find(
-      (picture) => picture.id === id
-    );
-
-    likedPicture.liked = !likedPicture.liked;
-
-    if (likedPicture.liked) {
-      return [...state, likedPicture];
-    } else {
-      const removeUnlikedPicture = state.filter((picture) => picture.id !== id);
-      return removeUnlikedPicture;
-    }
   };
 
   const generatePictureCards = (pictureData) => {
