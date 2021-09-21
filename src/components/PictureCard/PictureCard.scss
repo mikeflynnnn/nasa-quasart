@@ -24,9 +24,14 @@
     display: flex;
     margin-bottom: 10px;
     font-weight: bolder;
+    white-space: pre-wrap;
   }
 
   .apod-description {
     font-family: "Titillium Web", sans-serif;
+  }
+
+  .apod-button {
+    margin-top: 8px;
   }
 }
