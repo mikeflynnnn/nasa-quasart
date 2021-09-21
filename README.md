@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# QuasarT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+An app to view pictures and details from the NASA Astronomy Picture of the Day API
 
-### `npm start`
+Check it out on [Heroku](https://quasart.herokuapp.com/)!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Goals
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Deployed application
+- Modern styling with well-organized CSS
+- Saving favorites on page refresh
+- Animation with buttons and likes
 
-### `npm test`
+<details>
+  <summary>Set up</summary>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Clone the repository down and cd into the repo on your local machine.
+- Install the library dependencies by running:
+  - `npm install`
+- To verify that it is setup correctly, run `npm start` in your terminal.
+- Go to `http://localhost:3000/` and the site should display and have functionality.
+- Enter `control + c` in your terminal to stop the server at any time.
+</details>
 
-### `npm run build`
+## Technologies and Tools
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> - React
+> - JavaScript
+> - JSX
+> - HTML
+> - SCSS
+> - git
+> - GitHub
+> - REST Api
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Wins
+* Successfully deploying the app!!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* A lot of fun with animations and the API as I'm a big space nerd!
+## Challenges
+#### CSS styling choices
+Using `column-count` to style the PictureCards worked great to have the intended masonry effect I was going for. However, when I only had a few `PictureCards` they would fill as they CSS intended but now how I wanted to have them fill which was a row first display.
 
-### `npm run eject`
+## Site Design
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Home Page
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<img width="1400" alt="home page" src="https://i.imgur.com/39AvSeT.png">
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Masonry Image Effect
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<img width="1400" alt="masonry effect display" src="https://i.imgur.com/gMkZnTB.png">
 
-## Learn More
+### Loading Placeholders
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<img width="1400" alt="loading placeholder" src="https://i.imgur.com/EiVKgQd.png">
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Like Button Animation
 
-### Code Splitting
+<img width="1400" alt="main page" src="https://media.giphy.com/media/QtCCZDy2THWNgmuvBQ/giphy.gif?cid=790b76111fb66a7124fa9f4ad954d5f34c911a4cfc69836e&rid=giphy.gif&ct=g">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### Contributors:
 
-### Analyzing the Bundle Size
+- [Mike Flynn](https://github.com/mdflynn)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img src="https://avatars1.githubusercontent.com/u/64620860?s=460&u=22fbddd0d55029892d0c73c4b37808a36d5aa1bd&v=4" alt="Mike Flynn"
+ width="150" height="auto" />
