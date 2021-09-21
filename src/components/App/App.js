@@ -12,7 +12,8 @@ import { v4 as uuidv4 } from "uuid";
 const App = () => {
   const [pictureData, setPictureData] = useState({
     randomPictures: [],
-    favoritePictures: [],
+    favoritePictures:
+      JSON.parse(localStorage.getItem("favoritedPictures")) || [],
     loading: true,
   });
 
@@ -21,13 +22,19 @@ const App = () => {
   useEffect(() => {
     fetchAPOD().then((data) => {
       const pictures = addUniqueIdsToPictures(data);
+
       setPictureData({
+        ...pictureData,
         randomPictures: pictures,
-        favoritePictures: [],
         loading: false,
       });
     });
   }, []);
+
+  useEffect(() => {
+    const saveFavoritesToStorage = JSON.stringify(pictureData.favoritePictures);
+    localStorage.setItem("favoritedPictures", saveFavoritesToStorage);
+  }, [pictureData.favoritePictures]);
 
   const likeAPicture = (id) => {
     const updatedLikes = pictureData.randomPictures.map((picture) => {
