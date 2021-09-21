@@ -54,3 +54,17 @@ export const formatDate = (dateToFormat) => {
 
   return updatedDate;
 };
+
+export const updateFavoritePictures = (data, state, id) => {
+  const likedPicture = data.randomPictures.find((picture) => picture.id === id);
+
+  likedPicture.liked = !likedPicture.liked;
+
+  if (likedPicture.liked) {
+    return [...state, likedPicture];
+  } else {
+    const removeUnlikedPicture = state.filter((picture) => picture.id !== id);
+
+    return removeUnlikedPicture;
+  }
+};
