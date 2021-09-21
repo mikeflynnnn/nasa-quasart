@@ -38,11 +38,11 @@ const PictureCard = ({ pictureDetails, like }) => {
       <img className="apod-img" src={url} alt={title} />
       <div className="apod-details">
         <div className="apod-title-container">
-          <p className="apod-title">{title}</p>
+          <p className="apod-title">{title} </p>
           <p className="apod-date">- {formatedDate}</p>
         </div>
         <p className="apod-description">{explanation}</p>
-        <div onClick={() => like(id)}>
+        <div className="apod-button" onClick={() => like(id)}>
           <LikeButton liked={liked} />
         </div>
       </div>
