@@ -1,4 +1,4 @@
-.details-container {
+.apod-container {
   height: auto;
   display: inline-block;
   margin-bottom: 16px;
@@ -7,11 +7,20 @@
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
-  .details-img {
+  .apod-img {
     border-radius: 8px 8px 0 0;
     height: 400px;
     width: 100%;
     object-fit: fill;
   }
+}
+
+.apod-details {
+  padding: 10px;
+}
+
+.apod-title-container {
+  display: flex;
+  font-weight: bolder;
 }
 
