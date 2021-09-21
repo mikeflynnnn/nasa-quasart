@@ -23,10 +23,12 @@ export const generateLoadingCards = () => {
     loadingCards.push(<MyLoader />);
   }
 
-  return loadingCards.map((card, i) => {
+  const addIdsToLoadingCard = loadingCards.map((card, i) => {
     const uniqueId = uuidv4();
     return { ...card, key: uniqueId };
   });
+
+  return addIdsToLoadingCard;
 };
 
 const months = {
