@@ -41,7 +41,7 @@ const PictureCard = ({ pictureDetails, like }) => {
           <p className="apod-title">{title}</p>
           <p className="apod-date">- {formatedDate}</p>
         </div>
-        <p>{explanation}</p>
+        <p className="apod-description">{explanation}</p>
         <div onClick={() => like(id)}>
           <LikeButton liked={liked} />
         </div>
