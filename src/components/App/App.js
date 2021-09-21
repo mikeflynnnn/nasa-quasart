@@ -5,6 +5,7 @@ import Nav from "../Nav/Nav";
 import PictureCard from "../PictureCard/PictureCard";
 import MyLoader from "../MyLoader/MyLoader";
 import { fetchAPOD } from "../../apiCalls";
+import { addUniqueIdsToPictures, generateLoadingCards } from "../../utilities";
 // generate unique keys
 import { v4 as uuidv4 } from "uuid";
 
@@ -27,18 +28,6 @@ const App = () => {
       });
     });
   }, []);
-
-  const addUniqueIdsToPictures = (pictureData) => {
-    return pictureData.map((picture) => {
-      const uniqueId = uuidv4();
-
-      return {
-        ...picture,
-        id: uniqueId,
-        liked: false,
-      };
-    });
-  };
 
   const likeAPicture = (id) => {
     const updatedLikes = pictureData.randomPictures.map((picture) => {
@@ -83,18 +72,6 @@ const App = () => {
           like={likeAPicture}
         />
       );
-    });
-  };
-
-  const generateLoadingCards = () => {
-    let loadingCards = [];
-    
-    for (let i = 0; i < 20; i++) {
-      loadingCards.push(<MyLoader />);
-    }
-
-    return loadingCards.map((card, i) => {
-      return { ...card, key: i };
     });
   };
 
