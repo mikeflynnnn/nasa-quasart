@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import HomePage from "../HomePage/HomePage";
 import Nav from "../Nav/Nav";
 import PictureCard from "../PictureCard/PictureCard";
+import MyLoader from "../MyLoader/MyLoader";
 import { fetchAPOD } from "../../apiCalls";
 // generate unique keys
 import { v4 as uuidv4 } from "uuid";
@@ -11,6 +12,7 @@ const App = () => {
   const [pictureData, setPictureData] = useState({
     randomPictures: [],
     favoritePictures: [],
+    loading: true,
   });
 
   const [viewFavorites, setViewFavorites] = useState(false);
@@ -18,7 +20,11 @@ const App = () => {
   useEffect(() => {
     fetchAPOD().then((data) => {
       const pictures = addUniqueIdsToPictures(data);
-      setPictureData({ randomPictures: pictures, favoritePictures: [] });
+      setPictureData({
+        randomPictures: pictures,
+        favoritePictures: [],
+        loading: false,
+      });
     });
   }, []);
 
@@ -80,19 +86,30 @@ const App = () => {
     });
   };
 
-  // generateLoadingCard to react content loader. set size to number in fetch call (20)
-  // create flag for loading, setLoading, in (add to object in state)
-  // have fetch call toggle flag which causes re-render
+  const generateLoadingCards = () => {
+    let loadingCards = [];
+    
+    for (let i = 0; i < 20; i++) {
+      loadingCards.push(<MyLoader />);
+    }
+
+    return loadingCards.map((card, i) => {
+      return { ...card, key: i };
+    });
+  };
 
   const determineImages = viewFavorites
     ? pictureData.favoritePictures
     : pictureData.randomPictures;
-  console.log(pictureData.favoritePictures);
+
+  const determineLoading = pictureData.loading
+    ? generateLoadingCards()
+    : generatePictureCards(determineImages);
 
   return (
     <>
       <Nav favorites={{ viewFavorites, setViewFavorites }} />
-      <HomePage pictures={generatePictureCards(determineImages)} />
+      <HomePage pictures={determineLoading} />
     </>
   );
 };
