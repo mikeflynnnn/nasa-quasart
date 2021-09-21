@@ -4,43 +4,48 @@ import HomePage from "../HomePage/HomePage";
 import Nav from "../Nav/Nav";
 import PictureCard from "../PictureCard/PictureCard";
 import { fetchAPOD } from "../../apiCalls";
-// generate unique keys
-import { v4 as uuidv4 } from "uuid";
+import {
+  addUniqueIdsToPictures,
+  generateLoadingCards,
+  updateFavoritePictures,
+} from "../../utilities";
 
 const App = () => {
   const [pictureData, setPictureData] = useState({
     randomPictures: [],
-    favoritePictures: [],
+    favoritePictures:
+      JSON.parse(localStorage.getItem("favoritedPictures")) || [],
+    loading: true,
   });
 
   const [viewFavorites, setViewFavorites] = useState(false);
 
+  // fetch data
   useEffect(() => {
     fetchAPOD().then((data) => {
       const pictures = addUniqueIdsToPictures(data);
-      setPictureData({ randomPictures: pictures, favoritePictures: [] });
+
+      setPictureData((prevState) => {
+        return {
+          ...prevState,
+          randomPictures: pictures,
+          loading: false,
+        };
+      });
     });
   }, []);
 
-  const addUniqueIdsToPictures = (pictureData) => {
-    return pictureData.map((picture) => {
-      const uniqueId = uuidv4();
+  // update localStorage
+  useEffect(() => {
+    const saveFavoritesToStorage = JSON.stringify(pictureData.favoritePictures);
 
-      return {
-        ...picture,
-        id: uniqueId,
-        liked: false,
-      };
-    });
-  };
+    localStorage.setItem("favoritedPictures", saveFavoritesToStorage);
+  }, [pictureData.favoritePictures]);
 
   const likeAPicture = (id) => {
     const updatedLikes = pictureData.randomPictures.map((picture) => {
       if (picture.id === id) {
-        if (picture.liked) {
-          return { ...picture, liked: false };
-        }
-        return { ...picture, liked: true };
+        return { ...picture, liked: !picture.liked };
       }
       return picture;
     });
@@ -49,26 +54,12 @@ const App = () => {
       return {
         randomPictures: updatedLikes,
         favoritePictures: updateFavoritePictures(
+          pictureData,
           prevState.favoritePictures,
           id
         ),
       };
     });
-  };
-
-  const updateFavoritePictures = (state, id) => {
-    const likedPicture = pictureData.randomPictures.find(
-      (picture) => picture.id === id
-    );
-
-    likedPicture.liked = !likedPicture.liked;
-
-    if (likedPicture.liked) {
-      return [...state, likedPicture];
-    } else {
-      const removeUnlikedPicture = state.filter((picture) => picture.id !== id);
-      return removeUnlikedPicture;
-    }
   };
 
   const generatePictureCards = (pictureData) => {
@@ -87,10 +78,14 @@ const App = () => {
     ? pictureData.favoritePictures
     : pictureData.randomPictures;
 
+  const determineLoading = pictureData.loading
+    ? generateLoadingCards()
+    : generatePictureCards(determineImages);
+
   return (
     <>
       <Nav favorites={{ viewFavorites, setViewFavorites }} />
-      <HomePage pictures={generatePictureCards(determineImages)} />
+      <HomePage pictures={determineLoading} />
     </>
   );
 };

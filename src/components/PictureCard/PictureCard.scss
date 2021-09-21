@@ -1,11 +1,40 @@
-.details-container {
-  height: 550px;
-  width: 425px;
-  border: 2px solid black;
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap");
 
-  .details-img {
+.apod-container {
+  height: auto;
+  display: inline-block;
+  margin-bottom: 16px;
+  background-color: whitesmoke;
+  width: 450px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+  .apod-img {
+    border-radius: 8px 8px 0 0;
     height: 400px;
-    width: 400px;
+    width: 100%;
     object-fit: fill;
+  }
+}
+
+.apod-details {
+  padding: 10px;
+
+  .apod-title-container {
+    display: flex;
+    margin-bottom: 10px;
+    font-weight: bolder;
+    white-space: pre-wrap;
+  }
+
+  .apod-description {
+    font-family: "Titillium Web", sans-serif;
+  }
+
+  .apod-button {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
