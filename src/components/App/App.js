@@ -3,11 +3,8 @@ import React, { useEffect, useState } from "react";
 import HomePage from "../HomePage/HomePage";
 import Nav from "../Nav/Nav";
 import PictureCard from "../PictureCard/PictureCard";
-import MyLoader from "../MyLoader/MyLoader";
 import { fetchAPOD } from "../../apiCalls";
 import { addUniqueIdsToPictures, generateLoadingCards } from "../../utilities";
-// generate unique keys
-import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
   const [pictureData, setPictureData] = useState({
@@ -23,16 +20,19 @@ const App = () => {
     fetchAPOD().then((data) => {
       const pictures = addUniqueIdsToPictures(data);
 
-      setPictureData({
-        ...pictureData,
-        randomPictures: pictures,
-        loading: false,
+      setPictureData((prevState) => {
+        return {
+          ...prevState,
+          randomPictures: pictures,
+          loading: false,
+        };
       });
     });
   }, []);
 
   useEffect(() => {
     const saveFavoritesToStorage = JSON.stringify(pictureData.favoritePictures);
+
     localStorage.setItem("favoritedPictures", saveFavoritesToStorage);
   }, [pictureData.favoritePictures]);
 
