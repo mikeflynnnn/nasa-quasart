@@ -6,7 +6,9 @@ const Nav = ({ favorites }) => {
 
   return (
     <nav className="nav">
-      <p>QuasarT</p>
+      <p>
+        Quas<span>art</span>
+      </p>
       <button
         className="rainbow-button"
         onClick={() => setViewFavorites((prevState) => !prevState)}
