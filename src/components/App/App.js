@@ -13,8 +13,7 @@ import {
 const App = () => {
   const [pictureData, setPictureData] = useState({
     randomPictures: [],
-    favoritePictures:
-      JSON.parse(localStorage.getItem("favoritedPictures")) || [],
+    favoritePictures:[],
     loading: true,
   });
 
@@ -22,6 +21,7 @@ const App = () => {
 
   // fetch data
   useEffect(() => {
+    console.log(pictureData.favoritePictures);
     fetchAPOD().then((data) => {
       const pictures = addUniqueIdsToPictures(data);
 
@@ -34,13 +34,6 @@ const App = () => {
       });
     });
   }, []);
-
-  // update localStorage
-  useEffect(() => {
-    const saveFavoritesToStorage = JSON.stringify(pictureData.favoritePictures);
-
-    localStorage.setItem("favoritedPictures", saveFavoritesToStorage);
-  }, [pictureData.favoritePictures]);
 
   const likeAPicture = (id) => {
     const updatedLikes = pictureData.randomPictures.map((picture) => {
@@ -55,7 +48,6 @@ const App = () => {
         randomPictures: updatedLikes,
         favoritePictures: updateFavoritePictures(
           pictureData,
-          prevState.favoritePictures,
           id
         ),
       };
