@@ -9,12 +9,13 @@
   justify-content: center;
   align-items: center;
   height: 125px;
-  background: url("../../assets/space.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-
+  // background: url("../../assets/space.jpg") no-repeat center center fixed;
+  // -webkit-background-size: cover;
+  // -moz-background-size: cover;
+  // -o-background-size: cover;
+  // background-size: cover;
+  background-color: black;
+  
   p {
     font-family: "SpaceRave";
     font-size: 66px;
