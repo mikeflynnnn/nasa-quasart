@@ -55,16 +55,15 @@ export const formatDate = (dateToFormat) => {
   return updatedDate;
 };
 
-export const updateFavoritePictures = (data, state, id) => {
-  const likedPicture = data.randomPictures.find((picture) => picture.id === id);
-
+export const updateFavoritePictures = (state, id) => {
+  const likedPicture = state.randomPictures.find((picture) => picture.id === id);
+  
   likedPicture.liked = !likedPicture.liked;
 
   if (likedPicture.liked) {
-    return [...state, likedPicture];
+    return [...state.favoritePictures, likedPicture];
   } else {
-    const removeUnlikedPicture = state.filter((picture) => picture.id !== id);
-
+    const removeUnlikedPicture = state.favoritePictures.filter((picture) => picture.id !== id);
     return removeUnlikedPicture;
   }
 };
