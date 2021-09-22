@@ -39,7 +39,8 @@ Check it out on [Heroku](https://quasart.herokuapp.com/)!
 
 ## Wins
 * Successfully deploying the app!!
-
+* Implementing localStorage for favorite images on refresh
+* Fun button animations
 * A lot of fun with animations and the API as I'm a big space nerd!
 ## Challenges
 #### CSS styling choices
